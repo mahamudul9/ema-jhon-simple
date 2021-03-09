@@ -1,14 +1,45 @@
 import './App.css';
 import Header from './Components/Header/Header';
 import Shop from './Components/Shop/Shop';
-import Product from './Components/Product/Product';
+import React from "react";
+import Review from './Components/Review/Review';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import Inventory from './Components/Inventory/Inventory';
+import NotFound from './Components/NotFound/NotFound';
+import ProductDetail from './Components/ProductDetail/ProductDetail';
 
 function App() {
   return (
     <div >
       <Header></Header>
-      <Shop></Shop>
-    
+      <Router>
+        <Switch>
+          <Route path='/shop'>
+            <Shop></Shop>
+          </Route>
+          <Route path='/review'>
+            <Review></Review>
+          </Route>
+          <Route path='/manage'>
+            <Inventory></Inventory>
+          </Route>
+          <Route exact path='/'>
+            <Shop></Shop>
+          </Route>
+          <Route path='/product/:key'>
+            <ProductDetail></ProductDetail>
+          </Route>
+          <Route path='*'>
+            <NotFound></NotFound>
+          </Route>
+        </Switch>
+      </Router>
+      
+      
     </div>
   );
 }
